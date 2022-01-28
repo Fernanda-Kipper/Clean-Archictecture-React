@@ -1,5 +1,5 @@
-class Test {
-  a (): void {
-    console.log('hello');
-  }
-}
+describe('hello', () => {
+  test('testing config', () => {
+    expect(true).toBe(true)
+  })
+})
