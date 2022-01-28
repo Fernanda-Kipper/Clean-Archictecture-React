@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es5",
     "lib": [
       "dom",
       "dom.iterable",
@@ -10,14 +10,16 @@
     "module": "esnext",
     "moduleResolution": "node",
     "jsx": "react",
-    "rootDirs": ["src", "tests"],
+    "rootDir": "src",
     "baseUrl": "src",
-    "paths": {
-      "@/*": ["*"],
-      "@/tests/*": ["../tests/*"]
-    },
     "allowJs": true,
-    "resolveJsonModule": true
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames":  true,
+    "strict": true,
+    "isolatedModules": true,
+    "noEmit": true
   },
   "include": ["src", "tests"],
   "exclude": ["tests/e2e/cypress"]
