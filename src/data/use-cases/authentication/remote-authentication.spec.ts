@@ -23,4 +23,11 @@ describe('Remote Authentication', () => {
 
     expect(httpPostClientSpy.url).toBe(url)
   })
+  test('Should call httpPostClient with correct ', async () => {
+    const url = faker.internet.url()
+    const { sut, httpPostClientSpy } = makeSut(url)
+    await sut.auth()
+
+    expect(httpPostClientSpy.url).toBe(url)
+  })
 })
