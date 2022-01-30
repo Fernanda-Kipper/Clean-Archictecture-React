@@ -1,6 +1,6 @@
 import { AccountModel } from 'domain/modals/account-model'
 
-type AuthenticationParams = {
+export type AuthenticationParams = {
   email: string
   password: string
 }
