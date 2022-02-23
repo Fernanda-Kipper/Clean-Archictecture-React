@@ -1,8 +1,7 @@
-/* eslint-disable no-undef */
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
-modules.exports = {
+module.exports = {
   mode: 'development',
   entry: './src/main/index.tsx',
   output: {
@@ -34,9 +33,15 @@ modules.exports = {
     ]
   },
   devServer: {
-    contentBase: './public',
-    writeToDisk: true,
-    historyApiFallback: true
+    static: {
+      directory: path.join(__dirname, './public')
+    },
+    devMiddleware: {
+      writeToDisk: true
+    },
+    historyApiFallback: true,
+    open: true,
+    port: 3000
   },
   // do not include this libraries at bundle, because we are importing via JS in index.html
   externals: {
