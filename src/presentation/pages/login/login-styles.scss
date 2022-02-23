@@ -1,0 +1,148 @@
+@import '../../styles/colors.scss';
+
+* {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: $background;
+}
+
+input[type="password"], input[type="email"] {
+    border: 1px solid $primaryLight;
+    border-radius: 4px;
+    line-height: 40px;
+    padding: 0 40px 0 8px;
+
+    &:focus {
+        outline-color: $primaryLight;
+    }
+}
+
+button {
+    background-color: $primary;
+    color: $white;
+    border-radius: 8px;
+    font-size: 16px;
+    border: none;
+    line-height: 60px;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    height: 100vh;
+
+    .header{
+        background-color: $primary;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-top: 40px solid $primaryDark;
+
+        svg {
+            margin-top: 24px;
+        }
+
+        h1 {
+            color: $white;
+            margin: 16px 0px 24px;
+        }
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+
+        width: 90%;
+        padding: 40px;
+        border-radius: 8px;
+
+        background-color: $white;
+        box-shadow: 0px 1px 3px -1px rgba(0,0,0,0.5);
+
+        @media(min-width: 700px) {
+            width: 50%;
+        }
+
+        h2 {
+            color: $primaryDark;
+            text-align: center;
+            font-size: 24px;
+            text-transform: uppercase;
+            margin: 16px 0;
+        }
+
+        button {
+            margin-top: 32px;
+        }
+
+        .link {
+            text-align: center;
+            color: $primary;
+            text-transform: lowercase;
+            margin-top: 16px;
+
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .inputWrapper {
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            position: relative;
+            
+            input {
+                flex-grow: 1;
+            }
+
+            .inputStatus {
+                position: absolute;
+                right: 0px;
+                margin-right: 4px;
+                font-size: 12px;
+                cursor: help;
+            }
+        }
+
+        .errorWrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            align-self: center;
+
+            .spinner {
+                margin-top: 32px;
+            }
+
+            .error {
+                color: $primaryDark;
+                font-size: 16px;
+                margin-top: 32px;
+            }
+        }
+    }
+
+    .footer {
+        background-color: $primary;
+        height: 48px;
+    }
+}
