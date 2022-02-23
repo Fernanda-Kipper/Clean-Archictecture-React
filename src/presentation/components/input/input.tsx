@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, memo, ReactElement } from 'react'
+import React, { InputHTMLAttributes, ReactElement } from 'react'
 import Styles from './input-styles.scss'
 
 type Props = InputHTMLAttributes<HTMLInputElement>
@@ -12,4 +12,4 @@ export function Input (props: Props): ReactElement {
   )
 }
 
-export default memo(Input)
+export default Input

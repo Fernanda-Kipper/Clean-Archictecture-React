@@ -1,10 +1,10 @@
 import React, { ReactElement } from 'react'
 
-import { Spinner } from '../../components/spinner/spinner'
 import LoginHeader from '@/presentation/components/header/login-header'
 import Styles from './login-styles.scss'
 import { Footer } from '@/presentation/components/footer/footer'
 import { Input } from '@/presentation/components/input/input'
+import { FormStatus } from '@/presentation/components/formStatus/form-status'
 
 export function Login (): ReactElement {
   return (
@@ -16,10 +16,7 @@ export function Login (): ReactElement {
             <Input type="password" name="password" placeholder="Digite sua senha"/>
             <button type="submit">Enviar</button>
             <span className={Styles.link}>Criar conta</span>
-            <div className={Styles.errorWrapper}>
-              <Spinner/>
-              <span className={Styles.error}>Erro</span>
-            </div>
+            <FormStatus isLoading error="Erro inesperado"/>
           </form>
           <Footer />
       </div>
