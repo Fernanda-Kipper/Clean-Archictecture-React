@@ -20,6 +20,6 @@
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames":  true
   },
-  "include": ["src", "tests"],
+  "include": ["src", "tests", "./declaration.d.ts"],
   "exclude": ["tests/e2e/cypress"]
 }
