@@ -4,6 +4,7 @@ import { Spinner } from '../../components/spinner/spinner'
 import LoginHeader from '@/presentation/components/header/login-header'
 import Styles from './login-styles.scss'
 import { Footer } from '@/presentation/components/footer/footer'
+import { Input } from '@/presentation/components/input/input'
 
 export function Login (): ReactElement {
   return (
@@ -11,14 +12,8 @@ export function Login (): ReactElement {
           <LoginHeader />
           <form className={Styles.form}>
             <h2>Login</h2>
-            <div className={Styles.inputWrapper}>
-              <input type="email" name="email" placeholder="Digite seu e-mail"/>
-              <span className={Styles.inputStatus}>🔴</span>
-            </div>
-            <div className={Styles.inputWrapper}>
-              <input type="password" name="password" placeholder="Digite sua senha"/>
-              <span className={Styles.inputStatus}>🔴</span>
-            </div>
+            <Input type="email" name="email" placeholder="Digite seu e-mail"/>
+            <Input type="password" name="password" placeholder="Digite sua senha"/>
             <button type="submit">Enviar</button>
             <span className={Styles.link}>Criar conta</span>
             <div className={Styles.errorWrapper}>
