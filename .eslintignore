@@ -3,3 +3,4 @@ coverage
 public
 *.scss
 *.d.ts
+*.json
