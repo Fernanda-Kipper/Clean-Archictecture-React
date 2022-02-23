@@ -6,7 +6,7 @@ import { Footer } from '@/presentation/components/footer/footer'
 import { Input } from '@/presentation/components/input/input'
 import { FormStatus } from '@/presentation/components/formStatus/form-status'
 
-export function Login (): ReactElement {
+function Login (): ReactElement {
   return (
       <div className={Styles.login}>
           <LoginHeader />
@@ -22,3 +22,5 @@ export function Login (): ReactElement {
       </div>
   )
 }
+
+export default Login
