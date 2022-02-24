@@ -10,10 +10,10 @@ import { Context } from '@/presentation/contexts/form-context'
 function Login (): ReactElement {
   const [state] = useState({
     isLoading: false,
-    errorMessage: '',
     formErrors: {
       email: 'Campo obrigatório',
-      password: 'Campo obrigatório'
+      password: 'Campo obrigatório',
+      all: ''
     }
   })
 
