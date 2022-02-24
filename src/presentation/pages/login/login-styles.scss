@@ -12,6 +12,14 @@ button {
     &:hover {
         opacity: 0.9;
     }
+
+    &:disabled {
+        background-color: $disabledBackground;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
 }
 
 .login {

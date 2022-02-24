@@ -26,7 +26,7 @@ function Login (): ReactElement {
               <h2>Login</h2>
               <Input type="email" name="email" placeholder="Digite seu e-mail"/>
               <Input type="password" name="password" placeholder="Digite sua senha"/>
-              <button type="submit">Enviar</button>
+              <button data-testid="submit" type="submit" disabled>Enviar</button>
               <span className={Styles.link}>Criar conta</span>
               <FormStatus />
             </form>
