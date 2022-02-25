@@ -7,9 +7,11 @@ import { Input } from '@/presentation/components/input/input'
 import { FormStatus } from '@/presentation/components/formStatus/form-status'
 import { Context } from '@/presentation/contexts/form-context'
 import { Validation } from '@/presentation/protocols/validation'
+import { Authentication } from '@/domain/use-cases'
 
 type Props = {
   validation?: Validation
+  authentication?: Authentication
 }
 
 function Login (props: Props): ReactElement {
@@ -42,12 +44,14 @@ function Login (props: Props): ReactElement {
     updateFormError('password', props.validation.validate('password', state.password))
   }, [state.password])
 
-  const handleSubmit = (event: FormEvent): void => {
+  const handleSubmit = async (event: FormEvent): Promise<void> => {
     event.preventDefault()
     setState(prev => ({
       ...prev,
       isLoading: true
     }))
+
+    await props.authentication.auth({ email: state.email, password: state.password })
   }
 
   return (
