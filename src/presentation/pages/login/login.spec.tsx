@@ -100,7 +100,7 @@ describe('Login Page', () => {
 
   test('Should show valid email state if validation succeed', () => {
     const { sut, validationSpy } = makeSut()
-    const email = faker.internet.password()
+    const email = faker.internet.email()
     validationSpy.errorMessage = null
 
     const emailInput = sut.getByTestId('email')
@@ -109,5 +109,17 @@ describe('Login Page', () => {
 
     expect(emailStatus.title).toBe('Tudo certo!')
     expect(emailStatus.textContent).toBe('🟢')
+  })
+
+  test('Should enable submit button if form is valid', () => {
+    const { sut, validationSpy } = makeSut()
+    validationSpy.errorMessage = null
+
+    const emailInput = sut.getByTestId('email')
+    fireEvent.input(emailInput, { target: { value: faker.internet.email() } })
+    const passwordInput = sut.getByTestId('password')
+    fireEvent.input(passwordInput, { target: { value: faker.internet.password() } })
+
+    expect((sut.getByTestId('submit') as HTMLButtonElement).disabled).toBe(false)
   })
 })

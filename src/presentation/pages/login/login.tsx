@@ -50,7 +50,12 @@ function Login (props: Props): ReactElement {
               <h2>Login</h2>
               <Input type="email" name="email" placeholder="Digite seu e-mail" />
               <Input type="password" name="password" placeholder="Digite sua senha"/>
-              <button data-testid="submit" type="submit" disabled>Enviar</button>
+              <button
+                data-testid="submit"
+                type="submit"
+                disabled={!!state.formErrors.email || !!state.formErrors.password}>
+                  Enviar
+              </button>
               <span className={Styles.link}>Criar conta</span>
               <FormStatus />
             </form>
