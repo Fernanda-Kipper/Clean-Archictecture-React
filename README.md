@@ -17,7 +17,7 @@
 <h2 id="tech">Technologies</h2>
   This application architecture is organized in the following lawyers:
 
-  - **Domain** - the use cases of the application AK business rules
+  - **Domain** - the use cases of the application AK Application Business Rules
   - **Infrastructure** - implementation of dependencies of the domain some times using third party libraries, making the domain layer decoupled from the implementation with 3rd party libraries 
   - **Presentation** - interface, presentation responsible for making the communication of your use cases to users
   - **Main** - unique location in an application where modules are composed together
