@@ -18,18 +18,30 @@ function Login (props: Props): ReactElement {
     email: '',
     password: '',
     formErrors: {
-      email: 'Campo obrigatório',
-      password: 'Campo obrigatório',
+      email: '',
+      password: '',
       all: ''
     }
   })
 
   useEffect(() => {
-    props.validation.validate('email', state.email)
+    setState(prev => ({
+      ...prev,
+      formErrors: {
+        ...prev.formErrors,
+        email: props.validation.validate('email', state.email)
+      }
+    }))
   }, [state.email])
 
   useEffect(() => {
-    props.validation.validate('password', state.password)
+    setState(prev => ({
+      ...prev,
+      formErrors: {
+        ...prev.formErrors,
+        email: props.validation.validate('password', state.password)
+      }
+    }))
   }, [state.password])
 
   return (
