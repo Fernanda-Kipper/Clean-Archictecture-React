@@ -39,7 +39,7 @@ function Login (props: Props): ReactElement {
       ...prev,
       formErrors: {
         ...prev.formErrors,
-        email: props.validation.validate('password', state.password)
+        password: props.validation.validate('password', state.password)
       }
     }))
   }, [state.password])

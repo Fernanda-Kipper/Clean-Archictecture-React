@@ -67,8 +67,21 @@ describe('Login Page', () => {
 
     const emailInput = sut.getByTestId('email')
     fireEvent.input(emailInput, { target: { value: email } })
-    const emailStauts = sut.getByTestId('email-status')
+    const emailStatus = sut.getByTestId('email-status')
 
-    expect(emailStauts.title).toBe(validationSpy.errorMessage)
+    expect(emailStatus.title).toBe(validationSpy.errorMessage)
+    expect(emailStatus.textContent).toBe('🔴')
+  })
+
+  test('Should show password error if validation fails', () => {
+    const { sut, validationSpy } = makeSut()
+    const password = faker.internet.password()
+
+    const passwordInput = sut.getByTestId('password')
+    fireEvent.input(passwordInput, { target: { value: password } })
+    const passwordStatus = sut.getByTestId('password-status')
+
+    expect(passwordStatus.title).toBe(validationSpy.errorMessage)
+    expect(passwordStatus.textContent).toBe('🔴')
   })
 })
