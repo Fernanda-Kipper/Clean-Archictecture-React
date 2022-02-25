@@ -2,18 +2,7 @@ import React from 'react'
 import { cleanup, fireEvent, render, RenderResult } from '@testing-library/react'
 import { Login } from '..'
 import { Validation } from '@/presentation/protocols/validation'
-
-class ValidationSpy implements Validation {
-  errorMessage: string
-  fieldName: string
-  fieldValue: string
-
-  validate (fieldName: string, fieldValue: string): string {
-    this.fieldValue = fieldValue
-    this.fieldName = fieldName
-    return this.errorMessage
-  }
-}
+import { ValidationSpy } from '@/presentation/test/mock-validation'
 
 type SutTypes = {
   sut: RenderResult
