@@ -28,6 +28,10 @@ function Login (props: Props): ReactElement {
     props.validation.validate({ email: state.email })
   }, [state.email])
 
+  useEffect(() => {
+    props.validation.validate({ password: state.password })
+  }, [state.password])
+
   return (
       <div className={Styles.login}>
           <LoginHeader />

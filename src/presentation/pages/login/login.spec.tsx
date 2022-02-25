@@ -1,5 +1,5 @@
 import React from 'react'
-import { fireEvent, render, RenderResult } from '@testing-library/react'
+import { cleanup, fireEvent, render, RenderResult } from '@testing-library/react'
 import { Login } from '..'
 import { Validation } from '@/presentation/protocols/validation'
 
@@ -29,6 +29,10 @@ const makeSut = (): SutTypes => {
 }
 
 describe('Login Page', () => {
+  beforeEach(() => {
+    cleanup()
+  })
+
   test('Should initial render should be  correct initial state', () => {
     const { sut } = makeSut()
 
@@ -43,7 +47,7 @@ describe('Login Page', () => {
     expect(passwordStatus.textContent).toBe('🔴')
   })
 
-  test('Should call validation with correct value', () => {
+  test('Should call validation with correct email', () => {
     const { sut, validationSpy } = makeSut()
 
     const emailInput = sut.getByTestId('email')
@@ -51,6 +55,17 @@ describe('Login Page', () => {
 
     expect(validationSpy.input).toEqual({
       email: 'any_email'
+    })
+  })
+
+  test('Should call validation with correct password', () => {
+    const { sut, validationSpy } = makeSut()
+
+    const passwordInput = sut.getByTestId('password')
+    fireEvent.input(passwordInput, { target: { value: 'any_password' } })
+
+    expect(validationSpy.input).toEqual({
+      password: 'any_password'
     })
   })
 })
