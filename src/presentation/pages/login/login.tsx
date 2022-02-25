@@ -24,24 +24,22 @@ function Login (props: Props): ReactElement {
     }
   })
 
-  useEffect(() => {
+  const updateFormError = (field: string, message: string): void => {
     setState(prev => ({
       ...prev,
       formErrors: {
         ...prev.formErrors,
-        email: props.validation.validate('email', state.email)
+        [field]: message
       }
     }))
+  }
+
+  useEffect(() => {
+    updateFormError('email', props.validation.validate('email', state.email))
   }, [state.email])
 
   useEffect(() => {
-    setState(prev => ({
-      ...prev,
-      formErrors: {
-        ...prev.formErrors,
-        password: props.validation.validate('password', state.password)
-      }
-    }))
+    updateFormError('password', props.validation.validate('password', state.password))
   }, [state.password])
 
   return (
