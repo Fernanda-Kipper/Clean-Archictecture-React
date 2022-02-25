@@ -25,11 +25,11 @@ function Login (props: Props): ReactElement {
   })
 
   useEffect(() => {
-    props.validation.validate({ email: state.email })
+    props.validation.validate('email', state.email)
   }, [state.email])
 
   useEffect(() => {
-    props.validation.validate({ password: state.password })
+    props.validation.validate('password', state.password)
   }, [state.password])
 
   return (
