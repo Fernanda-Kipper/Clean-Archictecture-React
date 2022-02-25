@@ -5,6 +5,10 @@ type Props = HTMLAttributes<HTMLElement>
 
 export function Spinner (props: Props): ReactElement {
   return (
-    <div {...props} className={[Styles.spinner, props.className].join(' ')}></div>
+    <div
+      {...props}
+      data-testid="spinner"
+      className={[Styles.spinner, props.className].join(' ')}>
+      </div>
   )
 }

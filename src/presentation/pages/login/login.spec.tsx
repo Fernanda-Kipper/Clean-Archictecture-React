@@ -128,4 +128,17 @@ describe('Login Page', () => {
 
     expect((sut.getByTestId('submit') as HTMLButtonElement).disabled).toBe(false)
   })
+
+  test('Should show loading spinner on submit', () => {
+    const { sut } = makeSut()
+
+    const emailInput = sut.getByTestId('email')
+    fireEvent.input(emailInput, { target: { value: faker.internet.email() } })
+    const passwordInput = sut.getByTestId('password')
+    fireEvent.input(passwordInput, { target: { value: faker.internet.password() } })
+    fireEvent.submit(sut.getByTestId('submit'))
+
+    const spinner = sut.getByTestId('spinner')
+    expect(spinner).toBeTruthy()
+  })
 })

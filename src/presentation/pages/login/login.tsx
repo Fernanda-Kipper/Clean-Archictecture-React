@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from 'react'
+import React, { FormEvent, ReactElement, useEffect, useState } from 'react'
 
 import LoginHeader from '@/presentation/components/header/login-header'
 import Styles from './login-styles.scss'
@@ -42,11 +42,19 @@ function Login (props: Props): ReactElement {
     updateFormError('password', props.validation.validate('password', state.password))
   }, [state.password])
 
+  const handleSubmit = (event: FormEvent): void => {
+    event.preventDefault()
+    setState(prev => ({
+      ...prev,
+      isLoading: true
+    }))
+  }
+
   return (
       <div className={Styles.login}>
           <LoginHeader />
           <Context.Provider value={{ state, setState }}>
-            <form className={Styles.form}>
+            <form onSubmit={handleSubmit} className={Styles.form}>
               <h2>Login</h2>
               <Input type="email" name="email" placeholder="Digite seu e-mail" />
               <Input type="password" name="password" placeholder="Digite sua senha"/>
