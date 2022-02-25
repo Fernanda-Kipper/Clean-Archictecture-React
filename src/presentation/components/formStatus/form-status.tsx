@@ -4,7 +4,9 @@ import { Spinner } from '../spinner/spinner'
 import Styles from './form-status-styles.scss'
 
 export function FormStatus (): ReactElement {
-  const { isLoading, formErrors } = useContext(Context)
+  const { state } = useContext(Context)
+  const { isLoading, formErrors } = state
+
   return (
     <div className={Styles.errorWrapper} data-testid="error-wrapper">
         {isLoading && <Spinner />}
