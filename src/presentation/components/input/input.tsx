@@ -10,7 +10,13 @@ export function Input (props: Props): ReactElement {
   const error = formErrors[props.name]
 
   const getCurrentStatus = (): string => {
-    return '🔴'
+    if (error) return '🔴'
+    return '🟢'
+  }
+
+  const getTitle = (): string => {
+    if (error) return error
+    return 'Tudo certo!'
   }
 
   const updateValue = (event: FocusEvent<HTMLInputElement>): void => {
@@ -25,7 +31,7 @@ export function Input (props: Props): ReactElement {
         <input {...props} data-testid={props.name} onChange={updateValue}/>
         <span
           data-testid={`${props.name}-status`}
-          title={error}
+          title={getTitle()}
           className={Styles.inputStatus}>
             {getCurrentStatus()}
         </span>
