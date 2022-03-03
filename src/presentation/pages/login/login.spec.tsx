@@ -44,6 +44,12 @@ const populatePasswordField = (sut: RenderResult, password = faker.internet.pass
   fireEvent.input(passwordInput, { target: { value: password } })
 }
 
+const assertFieldStatus = (sut: RenderResult, fieldName: string, validationError?: string): void => {
+  const fieldStatus = sut.getByTestId(`${fieldName}-status`)
+  expect(fieldStatus.title).toBe(validationError || 'Tudo certo!')
+  expect(fieldStatus.textContent).toBe(validationError ? '🔴' : '🟢')
+}
+
 describe('Login Page', () => {
   beforeEach(() => {
     cleanup()
@@ -53,15 +59,10 @@ describe('Login Page', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
 
-    const emailStatus = sut.getByTestId('email-status')
-    const passwordStatus = sut.getByTestId('email-status')
-
     expect(sut.getByTestId('error-wrapper').childElementCount).toBe(0)
     expect((sut.getByTestId('submit') as HTMLButtonElement).disabled).toBe(true)
-    expect(emailStatus.title).toBe(validationError)
-    expect(emailStatus.textContent).toBe('🔴')
-    expect(passwordStatus.title).toBe(validationError)
-    expect(passwordStatus.textContent).toBe('🔴')
+    assertFieldStatus(sut, 'email', validationError)
+    assertFieldStatus(sut, 'password', validationError)
   })
 
   test('Should call validation with correct email', () => {
@@ -92,10 +93,8 @@ describe('Login Page', () => {
     const email = faker.internet.email()
 
     populateEmailField(sut, email)
-    const emailStatus = sut.getByTestId('email-status')
 
-    expect(emailStatus.title).toBe(validationError)
-    expect(emailStatus.textContent).toBe('🔴')
+    assertFieldStatus(sut, 'email', validationError)
   })
 
   test('Should show password error if validation fails', () => {
@@ -104,10 +103,8 @@ describe('Login Page', () => {
     const password = faker.internet.password()
 
     populatePasswordField(sut, password)
-    const passwordStatus = sut.getByTestId('password-status')
 
-    expect(passwordStatus.title).toBe(validationError)
-    expect(passwordStatus.textContent).toBe('🔴')
+    assertFieldStatus(sut, 'password', validationError)
   })
 
   test('Should show valid password state if validation succeed', () => {
@@ -115,10 +112,8 @@ describe('Login Page', () => {
     const password = faker.internet.password()
 
     populatePasswordField(sut, password)
-    const passwordStatus = sut.getByTestId('password-status')
 
-    expect(passwordStatus.title).toBe('Tudo certo!')
-    expect(passwordStatus.textContent).toBe('🟢')
+    assertFieldStatus(sut, 'password')
   })
 
   test('Should show valid email state if validation succeed', () => {
@@ -126,10 +121,8 @@ describe('Login Page', () => {
     const email = faker.internet.email()
 
     populateEmailField(sut, email)
-    const emailStatus = sut.getByTestId('email-status')
 
-    expect(emailStatus.title).toBe('Tudo certo!')
-    expect(emailStatus.textContent).toBe('🟢')
+    assertFieldStatus(sut, 'email')
   })
 
   test('Should enable submit button if form is valid', () => {
