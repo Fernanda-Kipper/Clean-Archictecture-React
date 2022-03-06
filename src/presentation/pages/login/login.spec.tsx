@@ -210,4 +210,14 @@ describe('Login Page', () => {
     await waitFor(() => sut.getByTestId('form'))
     expect(localStorage.setItem).toBeCalledWith('accessToken', authenticationSpy.account.accessToken)
   })
+
+  test('Should hide spinner on success', async () => {
+    const { sut } = makeSut()
+
+    simulateValidSubmit(sut)
+
+    await waitFor(() => expect(localStorage.setItem).toHaveBeenCalled())
+    const errorWrapper = sut.getByTestId('error-wrapper')
+    await waitFor(() => expect(errorWrapper.childElementCount).toBe(0))
+  })
 })

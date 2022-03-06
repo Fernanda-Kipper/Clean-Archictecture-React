@@ -55,6 +55,10 @@ function Login (props: Props): ReactElement {
     try {
       const account = await props.authentication.auth({ email: state.email, password: state.password })
       localStorage.setItem('accessToken', account.accessToken)
+      setState(prev => ({
+        ...prev,
+        isLoading: false
+      }))
     } catch (err) {
       setState(prev => ({
         ...prev,
