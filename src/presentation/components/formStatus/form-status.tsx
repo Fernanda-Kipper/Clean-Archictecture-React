@@ -10,7 +10,7 @@ export function FormStatus (): ReactElement {
   return (
     <div className={Styles.errorWrapper} data-testid="error-wrapper">
         {isLoading && <Spinner />}
-        {formErrors?.all ?? <span className={Styles.error}>{formErrors.all}</span>}
+        {formErrors?.all ?? <p data-testid="main-error" className={Styles.error}>{formErrors.all}</p>}
     </div>
   )
 }

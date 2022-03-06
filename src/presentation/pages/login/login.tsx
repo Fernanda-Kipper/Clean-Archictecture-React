@@ -52,8 +52,18 @@ function Login (props: Props): ReactElement {
       ...prev,
       isLoading: true
     }))
-
-    await props.authentication.auth({ email: state.email, password: state.password })
+    try {
+      await props.authentication.auth({ email: state.email, password: state.password })
+    } catch (err) {
+      setState(prev => ({
+        ...prev,
+        isLoading: false,
+        formErrors: {
+          ...prev.formErrors,
+          all: err.message
+        }
+      }))
+    }
   }
 
   return (
