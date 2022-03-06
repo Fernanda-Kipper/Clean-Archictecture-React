@@ -8,6 +8,7 @@ import { FormStatus } from '@/presentation/components/formStatus/form-status'
 import { Context } from '@/presentation/contexts/form-context'
 import { Validation } from '@/presentation/protocols/validation'
 import { Authentication } from '@/domain/use-cases'
+import { Link } from 'react-router-dom'
 
 type Props = {
   validation?: Validation
@@ -55,18 +56,18 @@ function Login (props: Props): ReactElement {
     try {
       const account = await props.authentication.auth({ email: state.email, password: state.password })
       localStorage.setItem('accessToken', account.accessToken)
-      setState(prev => ({
-        ...prev,
-        isLoading: false
-      }))
     } catch (err) {
       setState(prev => ({
         ...prev,
-        isLoading: false,
         formErrors: {
           ...prev.formErrors,
           all: err.message
         }
+      }))
+    } finally {
+      setState(prev => ({
+        ...prev,
+        isLoading: false
       }))
     }
   }
@@ -85,7 +86,7 @@ function Login (props: Props): ReactElement {
                 disabled={!!state.formErrors.email || !!state.formErrors.password}>
                   Enviar
               </button>
-              <span className={Styles.link}>Criar conta</span>
+              <Link to="/sign-up" data-testid="sign-up" className={Styles.link}>Criar conta</Link>
               <FormStatus />
             </form>
           </Context.Provider>

@@ -1,11 +1,12 @@
 import React from 'react'
 import 'jest-localstorage-mock'
-import { cleanup, fireEvent, render, RenderResult, waitFor } from '@testing-library/react'
+import { act, cleanup, fireEvent, render, RenderResult, waitFor } from '@testing-library/react'
 import { Login } from '..'
 import { ValidationSpy } from '@/presentation/test/mock-validation'
 import faker from 'faker'
 import { AuthenticationSpy } from '@/presentation/test/mock-authentication'
 import { InvalidCredentialsError } from '@/domain/errors'
+import { BrowserRouter } from 'react-router-dom'
 
 type SutTypes = {
   sut: RenderResult
@@ -21,7 +22,11 @@ const makeSut = (params?: SutParams): SutTypes => {
   const validationSpy = new ValidationSpy()
   const authenticationSpy = new AuthenticationSpy()
   validationSpy.errorMessage = params?.validationError
-  const sut = render(<Login validation={validationSpy} authentication={authenticationSpy} />)
+  const sut = render(
+    <BrowserRouter>
+      <Login validation={validationSpy} authentication={authenticationSpy} />
+    </BrowserRouter>
+  )
 
   return {
     sut,
@@ -205,7 +210,7 @@ describe('Login Page', () => {
   test('Should add accessToken on localStorage on success', async () => {
     const { sut, authenticationSpy } = makeSut()
 
-    simulateValidSubmit(sut)
+    act(() => simulateValidSubmit(sut))
 
     await waitFor(() => sut.getByTestId('form'))
     expect(localStorage.setItem).toBeCalledWith('accessToken', authenticationSpy.account.accessToken)
@@ -214,10 +219,19 @@ describe('Login Page', () => {
   test('Should hide spinner on success', async () => {
     const { sut } = makeSut()
 
-    simulateValidSubmit(sut)
+    act(() => simulateValidSubmit(sut))
 
     await waitFor(() => expect(localStorage.setItem).toHaveBeenCalled())
     const errorWrapper = sut.getByTestId('error-wrapper')
     await waitFor(() => expect(errorWrapper.childElementCount).toBe(0))
+  })
+
+  test('Should go to sign up page', async () => {
+    const { sut } = makeSut()
+    const signUpButton = sut.getByTestId('sign-up')
+
+    fireEvent.click(signUpButton)
+
+    expect(window.location.pathname).toBe('/sign-up')
   })
 })
