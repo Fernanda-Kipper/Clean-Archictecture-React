@@ -47,6 +47,7 @@ function Login (props: Props): ReactElement {
   const handleSubmit = async (event: FormEvent): Promise<void> => {
     event.preventDefault()
     if (state.isLoading) return
+    if (state.formErrors.email || state.formErrors.password) return
     setState(prev => ({
       ...prev,
       isLoading: true
@@ -59,7 +60,7 @@ function Login (props: Props): ReactElement {
       <div className={Styles.login}>
           <LoginHeader />
           <Context.Provider value={{ state, setState }}>
-            <form onSubmit={handleSubmit} className={Styles.form}>
+            <form data-testid="form" onSubmit={handleSubmit} className={Styles.form}>
               <h2>Login</h2>
               <Input type="email" name="email" placeholder="Digite seu e-mail" />
               <Input type="password" name="password" placeholder="Digite sua senha"/>
