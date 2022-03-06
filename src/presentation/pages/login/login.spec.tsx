@@ -58,6 +58,10 @@ const assertFieldStatus = (sut: RenderResult, fieldName: string, validationError
   expect(fieldStatus.textContent).toBe(validationError ? '🔴' : '🟢')
 }
 
+const assertButtonIsDisabled = (sut: RenderResult, fieldName: string, isDisabled: boolean): void => {
+  expect((sut.getByTestId(fieldName) as HTMLButtonElement).disabled).toBe(isDisabled)
+}
+
 describe('Login Page', () => {
   beforeEach(() => {
     cleanup()
@@ -69,7 +73,7 @@ describe('Login Page', () => {
     const { sut } = makeSut({ validationError })
 
     expect(sut.getByTestId('error-wrapper').childElementCount).toBe(0)
-    expect((sut.getByTestId('submit') as HTMLButtonElement).disabled).toBe(true)
+    assertButtonIsDisabled(sut, 'submit', true)
     assertFieldStatus(sut, 'email', validationError)
     assertFieldStatus(sut, 'password', validationError)
   })
@@ -140,7 +144,7 @@ describe('Login Page', () => {
     populateEmailField(sut)
     populatePasswordField(sut)
 
-    expect((sut.getByTestId('submit') as HTMLButtonElement).disabled).toBe(false)
+    assertButtonIsDisabled(sut, 'submit', false)
   })
 
   test('Should show loading spinner on submit', async () => {
