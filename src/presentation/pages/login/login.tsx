@@ -46,6 +46,7 @@ function Login (props: Props): ReactElement {
 
   const handleSubmit = async (event: FormEvent): Promise<void> => {
     event.preventDefault()
+    if (state.isLoading) return
     setState(prev => ({
       ...prev,
       isLoading: true
